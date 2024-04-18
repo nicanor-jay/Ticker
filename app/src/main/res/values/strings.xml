@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Ticker</string>
+    <string name="back_button">Back</string>
+    <string name="close_button">Close</string>
+    <string name="sort_by">Sort by</string>
+    <string name="show_completed">Show Completed</string>
+    <string name="ascending_sort_icon">Ascending sort icon</string>
+    <string name="descending_sort_icon">Descending sort icon</string>
+    <string name="completed_label">Completed</string>
+    <string name="overdue_label">Overdue</string>
+    <string name="upcoming_label">Upcoming</string>
+    <string name="no_todos_description">No todos active\nTap + to add</string>
+    <string name="no_completed_todos_description">No completed todos</string>
+    <string name="edit_labels">Edit labels</string>
+    <string name="attention">Attention</string>
+    <string name="delete_question">Are you sure you want to delete this label?\nTodos with this label will be reset to the default label.</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+</resources>
