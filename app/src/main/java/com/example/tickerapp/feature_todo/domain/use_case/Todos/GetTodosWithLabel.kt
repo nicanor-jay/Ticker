@@ -18,25 +18,21 @@ class GetTodosWithLabel(private val repository: TodoRepository) {
                     when (orderOption) {
                         OrderOptions.TITLE -> todos.sortedWith(
                             compareBy(
-                                { it.todo.isCompleted },
                                 { it.todo.title.lowercase() })
                         )
 
                         OrderOptions.DATE -> todos.sortedWith(
                             compareBy(
-                                { it.todo.isCompleted },
                                 { it.todo.timeStampDueDate })
                         )
 
                         OrderOptions.LABEL -> todos.sortedWith(
                             compareBy(
-                                { it.todo.isCompleted },
                                 { it.todo.labelId })
                         )
 
                         OrderOptions.PRIORITY -> todos.sortedWith(
                             compareBy(
-                                { it.todo.isCompleted },
                                 { it.todo.priority.orderNum })
                         )
                     }
@@ -44,21 +40,16 @@ class GetTodosWithLabel(private val repository: TodoRepository) {
 
                 OrderDirection.DESCENDING -> {
                     when (orderOption) {
-                        OrderOptions.TITLE -> todos.sortedWith(
-                            compareByDescending<TodoWithLabel> { !it.todo.isCompleted }.thenByDescending { it.todo.title.lowercase() })
+                        OrderOptions.TITLE -> todos.sortedByDescending { it.todo.title.lowercase() }
 
-                        OrderOptions.DATE -> todos.sortedWith(
-                            compareByDescending<TodoWithLabel> { !it.todo.isCompleted }.thenByDescending { it.todo.timestampCreated })
+                        OrderOptions.DATE -> todos.sortedByDescending { it.todo.timestampCreated }
 
-                        OrderOptions.LABEL -> todos.sortedWith(
-                            compareByDescending<TodoWithLabel> { !it.todo.isCompleted }.thenByDescending { it.todo.labelId })
+                        OrderOptions.LABEL -> todos.sortedByDescending { it.todo.labelId }
 
-                        OrderOptions.PRIORITY -> todos.sortedWith(
-                            compareByDescending<TodoWithLabel> { !it.todo.isCompleted }.thenByDescending {
-                                it.todo.priority.orderNum
-                            })
+                        OrderOptions.PRIORITY -> todos.sortedByDescending { it.todo.priority.orderNum }
                     }
                 }
+
             }
         }
     }

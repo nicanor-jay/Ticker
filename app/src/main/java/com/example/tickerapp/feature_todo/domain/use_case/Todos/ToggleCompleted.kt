@@ -10,7 +10,8 @@ class ToggleCompleted(private val repository: TodoRepository) {
         if (todo.isCompleted) {
             // If todo is completed, update timeStampDateCompleted to current time
             todoModified = todo.copy(
-                timestampCompleted = 0
+//                Keep old timestamp for completed section sorting order
+//                timestampCompleted = 0
             )
         } else {
             // If todo is not completed, reset timeStampDateCompleted to 0
