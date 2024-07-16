@@ -13,6 +13,7 @@ import com.example.tickerapp.feature_todo.domain.use_case.Todos.TodoUseCases
 import com.example.tickerapp.feature_todo.domain.util.DataStoreResult
 import com.example.tickerapp.feature_todo.domain.util.OrderDirection
 import com.example.tickerapp.feature_todo.presentation.util.TodoSections
+import com.example.tickerapp.feature_todo.presentation.util.isBeforeDay
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -219,6 +220,29 @@ class TodosViewModel @Inject constructor(
             is TodosEvent.UpdateLabel -> {
                 viewModelScope.launch {
                     labelUseCases.updateLabel(event.label)
+                }
+            }
+
+            is TodosEvent.ToggleDatePickerDialog -> {
+                _state.value = state.value.copy(
+                    isDatePickerVisible = !state.value.isDatePickerVisible
+                )
+            }
+
+            is TodosEvent.RescheduleTodos -> {
+                Log.d("TodosViewModel", "Rescheduling all overdue todos")
+                val currentTimeStamp = System.currentTimeMillis()
+                val overdueTodos = state.value.todos.filter {
+                    isBeforeDay(
+                        it.todo.timeStampDueDate,
+                        currentTimeStamp
+                    )
+                }
+
+                viewModelScope.launch {
+                    for (todoWithLabel in overdueTodos) {
+                        todoUseCases.addTodo(todoWithLabel.todo.copy(timeStampDueDate = event.newDueDate))
+                    }
                 }
             }
         }

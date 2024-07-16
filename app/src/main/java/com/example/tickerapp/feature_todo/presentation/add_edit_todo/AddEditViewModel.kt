@@ -151,7 +151,7 @@ class AddEditViewModel @Inject constructor(
 
             is AddEditTodoEvent.ToggleDatePickerDialog -> {
                 _state.value = state.value.copy(
-                    isDatePickerOpen = !state.value.isDatePickerOpen
+                    isDatePickerVisible = !state.value.isDatePickerVisible
                 )
             }
 
@@ -171,7 +171,6 @@ class AddEditViewModel @Inject constructor(
             is AddEditTodoEvent.ResetAddEditBottomSheetModal -> {
                 resetValues()
             }
-
         }
     }
 

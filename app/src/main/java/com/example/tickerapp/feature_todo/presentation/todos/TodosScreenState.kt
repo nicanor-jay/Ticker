@@ -18,6 +18,7 @@ data class TodosScreenState(
     val isEditLabelsModalVisible: Boolean = false,
     val currentTodoId: Int? = null,
     val showCompletedPreference: Boolean = false,
+    val isDatePickerVisible: Boolean = false,
 
     val labelsList: List<Label> = emptyList(),
     val isDeleteLabelConfirmationVisible: Boolean = false,

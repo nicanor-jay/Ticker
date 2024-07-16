@@ -308,6 +308,9 @@ fun TodosScreen(
                                     )
                                 )
                             },
+                            {newDueDate -> viewModel.onEvent(TodosEvent.RescheduleTodos(newDueDate))},
+                            state.isDatePickerVisible,
+                            {viewModel.onEvent(TodosEvent.ToggleDatePickerDialog)},
                             scope
                         )
                     }

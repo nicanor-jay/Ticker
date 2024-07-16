@@ -3,6 +3,7 @@ package com.example.tickerapp.feature_todo.presentation.todos
 import com.example.tickerapp.feature_todo.domain.model.Entities.Label
 import com.example.tickerapp.feature_todo.domain.model.Entities.Todo
 import com.example.tickerapp.feature_todo.domain.model.OrderOptions
+import com.example.tickerapp.feature_todo.presentation.add_edit_todo.AddEditTodoEvent
 import com.example.tickerapp.feature_todo.presentation.util.TodoSections
 
 sealed class TodosEvent {
@@ -12,9 +13,10 @@ sealed class TodosEvent {
     object ToggleOrderSection : TodosEvent()
     object ToggleMenuDropdown : TodosEvent()
     object ToggleEditLabelModal : TodosEvent()
+    data class RescheduleTodos(val newDueDate: Long) : TodosEvent()
+    object ToggleDatePickerDialog : TodosEvent()
     data class ToggleAddEditBottomSheetModal(val todoId: Int?) : TodosEvent()
     data object ToggleSortDropdown : TodosEvent()
-
     data class ToggleSection(val section: TodoSections) : TodosEvent()
 
     //Preferences Change

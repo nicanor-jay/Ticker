@@ -261,7 +261,7 @@ fun AddEditBottomSheetModal(
             }
         }
 
-        if (state.isDatePickerOpen) {
+        if (state.isDatePickerVisible) {
             val datePickerState = rememberDatePickerState(
                 initialSelectedDateMillis = dueDateState,
                 selectableDates = object : SelectableDates {
