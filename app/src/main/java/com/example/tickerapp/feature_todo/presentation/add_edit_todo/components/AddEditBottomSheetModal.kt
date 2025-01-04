@@ -41,7 +41,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
@@ -196,7 +195,7 @@ fun AddEditBottomSheetModal(
                     modifier = Modifier.weight(1f),
                     shape = RoundedCornerShape(4.dp),
 
-                ) {
+                    ) {
                     Icon(
                         painter = painterResource(id = R.drawable.baseline_calendar_month_24),
                         "Calendar icon"
@@ -219,7 +218,7 @@ fun AddEditBottomSheetModal(
                     modifier = Modifier.weight(1f),
                     shape = RoundedCornerShape(4.dp),
 
-                ) {
+                    ) {
                     Icon(
                         painter = painterResource(id = R.drawable.baseline_label_24),
                         "Label icon"

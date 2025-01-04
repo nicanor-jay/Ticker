@@ -67,7 +67,9 @@ fun TodoIsCompletedSection(
             .padding(16.dp)
             .fillMaxSize()
     ) {
-        items(todosWithLabel.sortedByDescending { it.todo.timestampCompleted }, key = { it.todo.id!! }) { todoWithLabel ->
+        items(
+            todosWithLabel.sortedByDescending { it.todo.timestampCompleted },
+            key = { it.todo.id!! }) { todoWithLabel ->
             val todoState = todoWithLabel.todo
 
             AnimatedVisibility(

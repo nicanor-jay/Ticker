@@ -2,7 +2,6 @@ package com.example.tickerapp.feature_todo.domain.model
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import com.example.tickerapp.ui.theme.Green
 import com.example.tickerapp.ui.theme.Orange
 import com.example.tickerapp.ui.theme.Red

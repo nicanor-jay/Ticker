@@ -67,7 +67,9 @@ import kotlinx.coroutines.launch
 )
 @Composable
 fun TodosScreen(
-    navController: NavController,isAddingNewTodo: Boolean, viewModel: TodosViewModel = hiltViewModel(),
+    navController: NavController,
+    isAddingNewTodo: Boolean,
+    viewModel: TodosViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsState()
     val currentSection by viewModel.currentSection.collectAsState()
@@ -308,9 +310,9 @@ fun TodosScreen(
                                     )
                                 )
                             },
-                            {newDueDate -> viewModel.onEvent(TodosEvent.RescheduleTodos(newDueDate))},
+                            { newDueDate -> viewModel.onEvent(TodosEvent.RescheduleTodos(newDueDate)) },
                             state.isDatePickerVisible,
-                            {viewModel.onEvent(TodosEvent.ToggleDatePickerDialog)},
+                            { viewModel.onEvent(TodosEvent.ToggleDatePickerDialog) },
                             scope
                         )
                     }
@@ -358,8 +360,7 @@ fun TodosScreen(
             editLabel = { value ->
                 viewModel.onEvent(TodosEvent.UpdateLabel(value))
             },
-            deleteLabel = {
-                    value ->
+            deleteLabel = { value ->
                 viewModel.onEvent(TodosEvent.UpdateSelectedLabelToDelete(value))
                 viewModel.onEvent(TodosEvent.ToggleDeleteLabelDialog)
             },

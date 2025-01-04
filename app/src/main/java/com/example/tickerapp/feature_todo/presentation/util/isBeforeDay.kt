@@ -1,7 +1,22 @@
 package com.example.tickerapp.feature_todo.presentation.util
 
-import com.example.tickerapp.feature_todo.domain.util.getDaysDifference
+import java.util.Calendar
 
 fun isBeforeDay(timestamp1: Long, timestamp2: Long): Boolean {
-    return getDaysDifference(timestamp1, timestamp2) > 0
+    val calendar1 = Calendar.getInstance().apply { timeInMillis = timestamp1 }
+    val calendar2 = Calendar.getInstance().apply { timeInMillis = timestamp2 }
+
+    // Set the time to midnight (00:00:00) to compare only the date part
+    calendar1.set(Calendar.HOUR_OF_DAY, 0)
+    calendar1.set(Calendar.MINUTE, 0)
+    calendar1.set(Calendar.SECOND, 0)
+    calendar1.set(Calendar.MILLISECOND, 0)
+
+    calendar2.set(Calendar.HOUR_OF_DAY, 0)
+    calendar2.set(Calendar.MINUTE, 0)
+    calendar2.set(Calendar.SECOND, 0)
+    calendar2.set(Calendar.MILLISECOND, 0)
+
+    // Return true if the first date is before the second
+    return calendar1.before(calendar2)
 }

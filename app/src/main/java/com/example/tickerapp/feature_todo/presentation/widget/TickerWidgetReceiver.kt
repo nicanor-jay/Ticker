@@ -107,6 +107,7 @@ class TickerWidgetReceiver : GlanceAppWidgetReceiver() {
                     observeData(context)
                 }
             }
+
             REFRESH_WIDGET_ACTION -> {
                 Log.d("TickerWidgetReceiver", "REFRESH_WIDGET_ACTION received")
 
