@@ -1,5 +1,7 @@
 package com.example.tickerapp.feature_todo.presentation
 
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -17,14 +19,22 @@ import com.example.tickerapp.feature_todo.presentation.todos.TodosEvent
 import com.example.tickerapp.feature_todo.presentation.todos.TodosScreen
 import com.example.tickerapp.feature_todo.presentation.todos.TodosViewModel
 import com.example.tickerapp.feature_todo.presentation.util.Screen
+import com.example.tickerapp.feature_todo.presentation.widget.TickerWidgetReceiver
 import com.example.tickerapp.ui.theme.TickerAppTheme
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private lateinit var viewModel: TodosViewModel
+    private val coroutineScope = MainScope()
+
+
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
 
@@ -36,6 +46,28 @@ class MainActivity : ComponentActivity() {
         } else {
             Log.d("MainActivity", "onNewIntent: Key 'isAddingNewTodoIntent' not found in intent")
             // Handle the case where the key is missing (optional)
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("MainActivity", "onPause triggered")
+        coroutineScope.launch {
+            withContext(Dispatchers.IO) {
+                val appWidgetManager = AppWidgetManager.getInstance(applicationContext)
+                val widgetIds = appWidgetManager.getAppWidgetIds(
+                    ComponentName(
+                        applicationContext,
+                        TickerWidgetReceiver::class.java
+                    )
+                )
+
+                val intent = Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE).apply {
+                    putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, widgetIds)
+                }
+
+                applicationContext.sendBroadcast(intent)
+            }
         }
     }
 
